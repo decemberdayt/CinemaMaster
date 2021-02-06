@@ -1,0 +1,11 @@
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap = "30px">
+<div>
+  <h1>Hall view</h1>
+</div>
+<div class="column">
+  <div *ngFor = "let row of rows" class= "row">
+    {{row}}
+    <button *ngFor = "let seat of seatFilterByRows(row)" mat-mini-fab [color]= "seatColor(seat)" (click)= "select(seat)" (click)= "formIsValid()"> </button>
+  </div>
+</div>
+</div>

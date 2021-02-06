@@ -1,0 +1,22 @@
+<div style="width:300px; margin:0 auto;" fxLayout="column" fxLayoutAlign="start stretch"  fxLayoutGap = "20px">
+            <mat-card *ngFor= "let movie of movies">
+              <mat-card-content>
+                <img class="pics" [src] = "movie.mPhotoUrl"><br>
+                <h2>{{movie.title}}</h2>
+                <h3>{{movie.subtitle}}</h3>
+                Rating: {{movie.rating}}<br>
+                Creator: {{movie.creator}}<br>
+                Duration(min): {{movie.durationMin}}
+              </mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap = "20px">
+                <mat-card-actions *ngFor= "let show of shows">
+                  <div>
+                    <button
+                      *ngIf= "movie.idMovie == show.idMovie && show.showDate == showDate" mat-raised-button color="primary" (click) = "select(show)">
+                        {{show.showDate}} {{show.showTime}}
+                    </button>
+                  </div>
+                </mat-card-actions>
+              </div>
+            </mat-card>
+</div>

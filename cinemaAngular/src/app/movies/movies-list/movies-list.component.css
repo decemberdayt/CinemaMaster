@@ -1,0 +1,9 @@
+.pics {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+}
+
+.mat-card-content {
+  text-align: center;
+}

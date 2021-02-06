@@ -1,0 +1,11 @@
+<div>
+    <h2>Lista aktorów</h2>
+    <ul>
+        <li *ngFor = "let actor of actorsList">
+            <mat-card>Imie : {{actor.name}} <br>
+            Nazwisko: {{actor.surname}} <br>
+            Kraj: {{actor.country}} </mat-card>
+            <br>
+        </li>
+    </ul>
+</div>

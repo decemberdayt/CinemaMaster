@@ -1,0 +1,5 @@
+::ng-deep .mat-card{
+
+    border: 3px solid #000;
+    width: 200px;
+   }

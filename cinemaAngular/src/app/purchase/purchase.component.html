@@ -1,0 +1,23 @@
+<div fxLayoutGap = "50px">
+<mat-horizontal-stepper  #stepper linear  iseditable>
+  <mat-step [completed]= "firstStepCompleted">
+    <app-purchase-form (formIsCorrect)= "isFirstStepCompleted($event)"></app-purchase-form>
+    <button mat-button matStepperNext color = "primary"  *ngIf= "firstStepCompleted">
+      Next
+     </button>
+  </mat-step>
+  <mat-step [completed]= "secondStepCompleted">
+    <app-purchase-seats [seats] = "seatsList" [rows] = "rows" (formIsCorrect)= "isSecondStepCompleted($event)"></app-purchase-seats>
+    <button mat-button matStepperPrevious color = "primary">
+      Previous
+     </button>
+    <button mat-button matStepperNext color = "primary" (click)= "buyTickets()" *ngIf= "secondStepCompleted">
+      Confirm reservation
+     </button>
+  </mat-step>
+  <mat-step>
+    <app-confirmation [buyedTickets] = "buyedTicket" [show] = "show"></app-confirmation>
+  </mat-step>
+  </mat-horizontal-stepper>
+</div>
+  <button mat-raised-button color="primary" fxLayoutAlign="start end" (click) = "backToMOvies()">Back to movies list</button>

@@ -1,0 +1,11 @@
+<h1>Confirmation</h1>
+<h2>You reserved tickets for {{show.title}} at {{show.idHall}} cinema hall</h2>
+<p>Date: {{show.showDate}} Time: {{show.showTime}}</p>
+<div fxLayoutGap = "20px" *ngFor= "let ticket of buyedTickets">
+  <mat-card>
+    Buyer name:    {{ticket.buyerName}}<br>
+    Buyer surname: {{ticket.buyerSurname}}<br>
+    Price:         {{ticket.price}}<br>
+    Seat number:   {{ticket.idSeat}}
+  </mat-card>
+</div>
