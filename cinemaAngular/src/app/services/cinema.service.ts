@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Actor } from '../actors/actors.component';
@@ -7,13 +7,21 @@ import { Seat } from '../models/seat';
 import { Ticket } from '../models/ticket';
 import { Movie } from '../models/movie';
 import { PurchaseDetails } from '../models/purchseDetails';
+import {TokenStorageService} from "./token-storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CinemaService {
 
-  constructor(private http: HttpClient) { }
+  currentUser: any;
+  idUser: any;
+
+  constructor(private http: HttpClient, private token: TokenStorageService) { }
+
+  ngOnInit(): void {
+    this.currentUser = this.token.getUser();
+  }
 
   getActors(): Observable<Array<Actor>>{
     return this.http.get<Array<Actor>>('http://localhost:8080/actors/');
@@ -33,11 +41,20 @@ export class CinemaService {
   }
 
   getSeatsByShow(idShow : number) : Observable<Array<Seat>>{
-    return this.http.get<Array<Seat>>('http://localhost:8080/seats/occupancy/' + idShow);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.token.getToken()
+    });
+    return this.http.get<Array<Seat>>('http://localhost:8080/seats/occupancy/' + idShow, {headers: reqHeader});
   }
 
   postTicket(ticketList: Array<Ticket>) : Observable<Array<Ticket>>{
-      return this.http.post<Array<Ticket>>('http://localhost:8080/tickets/addTickets/confirmed', ticketList);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.token.getToken()
+    });
+    const param = new HttpParams().set('idUser', this.token.getUser().id);
+      return this.http.post<Array<Ticket>>('http://localhost:8080/tickets/addTickets/confirmed', ticketList, {headers: reqHeader, params: param});
   }
 
   getPuchaseDetails(idTicket: number): Observable<PurchaseDetails>{

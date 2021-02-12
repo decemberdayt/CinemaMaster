@@ -62,8 +62,11 @@ public interface TicketMapper {
             "INNER JOIN ANONYMOUS.SEAT S\n" +
             "ON\n" +
             "    S.IDSEAT = T.IDSEAT\n" +
-            "WHERE T.IDTICKET IN (#{idTicket})")
-    public PurchaseSummary getPurchaseSummary(int idTicket);
+            "INNER JOIN ANONYMOUS.USER_TICKETS UT\n" +
+            "ON\n" +
+            "    UT.IDTICKET = T.IDTICKET\n" +
+            "WHERE T.IDTICKET IN (#{idTicket}) AND UT.IDUSER = #{idUser}")
+    public PurchaseSummary getPurchaseSummary(int idTicket, int idUser);
 
 
 }

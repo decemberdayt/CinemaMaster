@@ -5,6 +5,7 @@ import { Movie } from '../models/movie'
 import { CinemaService } from '../services/cinema.service';
 import { TicketService } from '../services/ticket.service';
 import { Router } from '@angular/router';
+import {TokenStorageService} from "../services/token-storage.service";
 
 @Component({
   selector: 'app-movies',
@@ -14,14 +15,16 @@ import { Router } from '@angular/router';
 export class MoviesComponent implements OnInit {
 
   moviesList : Array<Movie> = [];
+  currentUser: any;
 
-  constructor(private httpService: CinemaService, private buy: TicketService, private router: Router, public datepipe: DatePipe) { }
+  constructor(private httpService: CinemaService, private buy: TicketService, private router: Router, public datepipe: DatePipe, private token: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getMovies();
     this.getShows();
     this.pickedDate = new Date();
     this.pickedDate = this.datepipe.transform(this.pickedDate, 'yyyy-MM-dd') as unknown as Date;
+    this.currentUser = this.token.getUser();
   }
 
   showList: Array<Show> = [];

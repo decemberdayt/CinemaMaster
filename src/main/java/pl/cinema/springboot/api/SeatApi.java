@@ -1,5 +1,6 @@
 package pl.cinema.springboot.api;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.cinema.springboot.mapper.SeatMapper;
 import pl.cinema.springboot.model.Seat;

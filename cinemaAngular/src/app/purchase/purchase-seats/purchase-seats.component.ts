@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, EventEmitter, Output, OnChanges, SimpleChanges} from '@angular/core';
 import { Seat } from 'src/app/models/seat';
 import { TicketService } from 'src/app/services/ticket.service';
+import {TokenStorageService} from "../../services/token-storage.service";
 
 @Component({
   selector: 'app-purchase-seats',
@@ -21,10 +22,12 @@ export class PurchaseSeatsComponent implements OnInit, OnChanges {
   // TO DO uzaleznic to od listy biletow
   numberOfTickets: number;
   chosenSeats: number = 0;
+  currentUser: any;
 
-  constructor(private buy: TicketService) { }
+  constructor(private buy: TicketService, private token: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.currentUser = this.token.getUser();
     this.buy.getNumberOfTickets().subscribe((value)=>{
       this.numberOfTickets = value;
     });

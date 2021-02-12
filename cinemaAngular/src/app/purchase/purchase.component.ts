@@ -6,6 +6,7 @@ import { CinemaService } from '../services/cinema.service';
 import { Seat } from '../models/seat';
 import { Router } from '@angular/router';
 import { PurchaseDetails } from '../models/purchseDetails';
+import {TokenStorageService} from "../services/token-storage.service";
 
 @Component({
   selector: 'app-purchase',
@@ -28,7 +29,7 @@ export class PurchaseComponent implements OnInit {
   constructor(
     private httpService: CinemaService,
     private router: Router,
-    private buy: TicketService
+    private buy: TicketService,
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +66,6 @@ export class PurchaseComponent implements OnInit {
   }
 
   addTicket() {
-    console.log(this.ticketList);
     this.httpService.postTicket(this.ticketList).subscribe((tickets) => {
       this.buyedTicket = tickets;
     });
@@ -80,7 +80,7 @@ export class PurchaseComponent implements OnInit {
   }
 
    buyTickets() : void{
- 
+
 	 console.log('Buy ticket ' +this.buy.buyerName);
 	 this.buyerName = this.buy.buyerName;
 	 this.buyerSurename = this.buy.buyerSurname;

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { PurchaseDetails } from 'src/app/models/purchseDetails';
 import { TicketService } from 'src/app/services/ticket.service';
+import {TokenStorageService} from "../../services/token-storage.service";
 
 @Component({
   selector: 'app-purchase-form',
@@ -15,10 +16,12 @@ export class PurchaseFormComponent implements OnInit {
   buyerName: string;
   buyerSurname: string;
   ticketsNumber: number;
+  currentUser: any;
 
-  constructor(private buy: TicketService) { }
+  constructor(private buy: TicketService, private token: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.currentUser = this.token.getUser();
   }
 
   formIsValid() {

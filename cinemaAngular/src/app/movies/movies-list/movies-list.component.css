@@ -1,9 +1,23 @@
+
 .pics {
   object-fit: cover;
-  width: 150px;
-  height: 150px;
+  width: 270px;
+  height: 270px;
 }
 
-.mat-card-content {
+.label-title {
+  background: #c05d4f;
+  color: #ede9e6;
+  width: 270px;
   text-align: center;
+}
+
+.image-list-item {
+  width: 300px;
+}
+
+.container {
+  flex-flow: row wrap;
+  display: flex;
+  margin-top: -30pt;
 }

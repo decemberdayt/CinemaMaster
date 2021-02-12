@@ -1,13 +1,20 @@
-<div style="width:300px; margin:0 auto;" fxLayout="column" fxLayoutAlign="start stretch"  fxLayoutGap = "20px">
-            <mat-card *ngFor= "let movie of movies">
-              <mat-card-content>
-                <img class="pics" [src] = "movie.mPhotoUrl"><br>
-                <h2>{{movie.title}}</h2>
-                <h3>{{movie.subtitle}}</h3>
-                Rating: {{movie.rating}}<br>
-                Creator: {{movie.creator}}<br>
-                Duration(min): {{movie.durationMin}}
-              </mat-card-content>
+<body>
+<div class="container" fxLayoutAlign="space-around center"  fxLayoutGap = "20px">
+            <mat-card class="listOfMovies" *ngFor= "let movie of movies">
+                <div class="image-list-item">
+                  <div class="image">
+                    <img class="pics" [src] = "movie.mPhotoUrl"><br>
+                  </div>
+                  <div class="label-title">
+                    <h2>{{movie.title}}</h2>
+                    <h3>{{movie.subtitle}}</h3>
+                  </div>
+                  <div id="label-body">
+                    Rating: {{movie.rating}}<br>
+                    Creator: {{movie.creator}}<br>
+                    Duration(min): {{movie.durationMin}}
+                  </div>
+                </div>
                 <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap = "20px">
                 <mat-card-actions *ngFor= "let show of shows">
                   <div>
@@ -20,3 +27,4 @@
               </div>
             </mat-card>
 </div>
+</body>

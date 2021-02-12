@@ -11,8 +11,11 @@
       <li class="nav-item" *ngIf="showModeratorBoard">
         <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
       </li>
+<!--      <li class="nav-item">-->
+<!--        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>-->
+<!--      </li>-->
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        <a href="/movies" class="nav-link" routerLink="movies">Movies </a>
       </li>
     </ul>
 
@@ -30,7 +33,7 @@
         <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
       </li>
       <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
+        <a href class="nav-link" (click)="logout()">Log Out</a>
       </li>
     </ul>
   </nav>
@@ -38,4 +41,36 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+</div>
+<div class="footer">
+  <div class="footer-columns">
+    <div class="footer-column">
+      <table>
+        <tr>
+          <th>Informacje</th>
+        </tr>
+        <tr>Regulacje</tr>
+        <tr>Polityka prywatności</tr>
+        <tr>Polityka cookies</tr>
+      </table>
+    </div>
+    <div class="footer-column">
+      <table>
+        <tr>
+          <th>Obserwuj nas</th>
+        </tr>
+        <tr>Facebook</tr>
+        <tr>Twitter</tr>
+        <tr>Instagram</tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="created">
+    Projekt zaliczeniowy | Przedmiot Aplikacje Internetowe<br />
+    Wykonały:<br />
+    Weronika Kopeć - Backend<br />
+    Joanna Samsel - Frontend
+  </div>
+
 </div>
