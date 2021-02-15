@@ -57,8 +57,13 @@ export class CinemaService {
       return this.http.post<Array<Ticket>>('http://localhost:8080/tickets/addTickets/confirmed', ticketList, {headers: reqHeader, params: param});
   }
 
-  getPuchaseDetails(idTicket: number): Observable<PurchaseDetails>{
+  getPurchaseDetails(idTicket: number): Observable<PurchaseDetails>{
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.token.getToken()
+    });
     const param = new HttpParams().set('idTicket', idTicket +'');
-    return this.http.get<PurchaseDetails>('http://localhost:8080/tickets/getTickets', { params: param});
+    param.append('idUser', this.token.getUser().id);
+    return this.http.get<PurchaseDetails>('http://localhost:8080/tickets/getTickets', { headers: reqHeader, params: param});
   }
 }

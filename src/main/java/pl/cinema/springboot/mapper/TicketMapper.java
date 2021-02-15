@@ -42,30 +42,35 @@ public interface TicketMapper {
             "    T.IDTICKET\n" +
             "    , T.BUYERNAME\n" +
             "    , T.BUYERSURNAME\n" +
-            "    , M.TITLE\n" +
-            "    , H.HALLNAME\n" +
+            "    , T.PRICE\n" +
+            "    , T.REDUCED\n" +
             "    , SH.SHOWDATE\n" +
             "    , SH.SHOWTIME\n" +
-            "    , S.IDSEAT\n" +
+            "    , M.TITLE\n" +
+            "    , M.SUBTITLE\n" +
+            "    , M.DURATIONMIN\n" +
+            "    , H.HALLNAME\n" +
+            "    , T.IDSEAT\n" +
             "    , S.HALLROW\n" +
-            "    , T.PRICE\n" +
-            "FROM ANONYMOUS.TICKET T\n" +
+            "FROM ANONYMOUS.USER_TICKETS UT\n" +
+            "INNER JOIN ANONYMOUS.TICKET T\n" +
+            "ON\n" +
+            "    T.IDTICKET = UT.IDTICKET\n" +
             "INNER JOIN ANONYMOUS.SHOW SH\n" +
             "ON\n" +
             "    SH.IDSHOW = T.IDSHOW\n" +
+            "INNER JOIN ANONYMOUS.HALL H\n" +
+            "ON\n" +
+            "    H.IDHALL = T.IDHALL\n" +
             "INNER JOIN ANONYMOUS.MOVIE M\n" +
             "ON\n" +
             "    M.IDMOVIE = SH.IDMOVIE\n" +
-            "INNER JOIN ANONYMOUS.HALL H\n" +
-            "ON\n" +
-            "    H.IDHALL = SH.IDHALL\n" +
             "INNER JOIN ANONYMOUS.SEAT S\n" +
             "ON\n" +
             "    S.IDSEAT = T.IDSEAT\n" +
-            "INNER JOIN ANONYMOUS.USER_TICKETS UT\n" +
-            "ON\n" +
-            "    UT.IDTICKET = T.IDTICKET\n" +
-            "WHERE T.IDTICKET IN (#{idTicket}) AND UT.IDUSER = #{idUser}")
+            "    AND H.IDHALL = S.IDHALL\n" +
+            "WHERE UT.IDUSER = #{idUser}" +
+            "   AND T.IDTICKET = #{idTicket}")
     public PurchaseSummary getPurchaseSummary(int idTicket, int idUser);
 
 

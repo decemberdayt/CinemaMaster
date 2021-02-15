@@ -3,6 +3,15 @@
   border-bottom: solid 3px #c05d4f;
   margin-bottom: 320pt;
 }
+.navbar.navbar-expand {
+  margin-left: -450pt;
+}
+.nav-item a {
+  margin-top: 8pt;
+}
+#logo {
+  margin-right: 30pt;
+}
 .footer {
   background: #2c313c;
   border-top: solid 3px #c05d4f;
@@ -31,4 +40,14 @@
   background-repeat: no-repeat;
   background-position: top;
   background-size: 900pt;
+}
+.navbar a:link {
+  border: solid 1pt #c05d4f;
+  color: #c05d4f;
+  margin-right: 5pt;
+  transition-duration: 2s;
+}
+.navbar a:hover {
+  background: #c05d4f;
+  transition-duration: 1s;
 }

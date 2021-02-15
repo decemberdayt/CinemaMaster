@@ -1,16 +1,16 @@
 h1 {
-  padding-top: 10pt;
+  margin-left: 10pt;
   background: #c05d4f;
-  padding: 10pt 10pt 0pt 10pt;
-  height: 50pt;
+  width: 100pt;
+  padding: 5pt;
+  text-align: center;
   color: #ede9e6;
-  margin-left: -380pt;
-  border-radius: 20px 20px 0pt 0pt;
+  border-radius: 0pt 0pt 10pt 10pt;
 }
 #calendar {
-  background: #c05d4f;
-  padding: 10pt;
-  height: 50pt;
-  border-radius: 20px 20px 0pt 0pt;
-  margin-left: -800pt;
+  background: #3c4655;
+  padding: 10pt 10pt;
+}
+#calendar mat-label {
+  color: #ede9e6;
 }
