@@ -1,4 +1,4 @@
-package pl.cinema.springboot;
+package pl.cinema.springboot.mail;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -6,7 +6,6 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.parameters.P;
 import pl.cinema.springboot.model.views.PurchaseSummary;
 
 import javax.activation.DataSource;

@@ -1,4 +1,4 @@
-package pl.cinema.springboot.api;
+package pl.cinema.springboot.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import pl.cinema.springboot.mapper.ActorMapper;
@@ -10,13 +10,13 @@ import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/actors")
-public class ActorApi {
+@RequestMapping("/api/actors")
+public class ActorController {
 
     private ActorMapper actorMapper;
     protected final Logger log = Logger.getLogger(getClass().getName());
 
-    public ActorApi(ActorMapper actorMapper) {
+    public ActorController(ActorMapper actorMapper) {
         this.actorMapper = actorMapper;
     }
 

@@ -1,4 +1,4 @@
-package pl.cinema.springboot.api;
+package pl.cinema.springboot.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/seats")
-public class SeatApi {
+@RequestMapping("/api/seats")
+public class SeatController {
 
     private SeatMapper seatMapper;
     protected final Logger log = Logger.getLogger(getClass().getName());
 
-    public SeatApi(SeatMapper seatMapper) {
+    public SeatController(SeatMapper seatMapper) {
         this.seatMapper = seatMapper;
     }
 

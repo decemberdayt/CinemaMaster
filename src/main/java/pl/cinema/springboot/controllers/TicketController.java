@@ -1,18 +1,17 @@
-package pl.cinema.springboot.api;
+package pl.cinema.springboot.controllers;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import pl.cinema.springboot.GeneratePdfReport;
-import pl.cinema.springboot.controllers.EmailController;
+import pl.cinema.springboot.mail.GeneratePdfReport;
 import pl.cinema.springboot.mail.EmailSender;
 import pl.cinema.springboot.mapper.TicketMapper;
 import pl.cinema.springboot.mapper.UserTicketsMapper;
 import pl.cinema.springboot.model.Ticket;
 import pl.cinema.springboot.model.views.PurchaseSummary;
-import pl.cinema.springboot.userModel.User;
-import pl.cinema.springboot.userModel.UserRepository;
+import pl.cinema.springboot.model.userModel.User;
+import pl.cinema.springboot.model.userModel.UserRepository;
 
 import javax.activation.DataSource;
 import java.util.*;
@@ -21,33 +20,22 @@ import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/tickets")
-public class TicketApi {
+@RequestMapping("/api/tickets")
+public class TicketController {
 
     private TicketMapper ticketMapper;
     private UserTicketsMapper userTicketsMapper;
     protected final Logger log = Logger.getLogger(getClass().getName());
-    private EmailController emailController;
     private final EmailSender emailSender;
     private final TemplateEngine templateEngine;
     private UserRepository userRepository;
 
-    public TicketApi(TicketMapper ticketMapper, UserTicketsMapper userTicketsMapper, EmailController emailController, EmailSender emailSender, TemplateEngine templateEngine, UserRepository userRepository) {
+    public TicketController(TicketMapper ticketMapper, UserTicketsMapper userTicketsMapper, EmailSender emailSender, TemplateEngine templateEngine, UserRepository userRepository) {
         this.ticketMapper = ticketMapper;
         this.userTicketsMapper = userTicketsMapper;
-        this.emailController = emailController;
         this.emailSender = emailSender;
         this.templateEngine = templateEngine;
         this.userRepository = userRepository;
-    }
-
-    @GetMapping
-    public List<Ticket> getAll() {return ticketMapper.findAll();}
-
-    @GetMapping("/max")
-    public Ticket findMaxId() {
-        Ticket id = ticketMapper.findMaxId();
-        return id;
     }
 
     public int getNextIdTicket()
@@ -62,6 +50,9 @@ public class TicketApi {
         }
         return id;
     }
+
+    @GetMapping("/all")
+    public List<Ticket> getAll(@RequestParam int idUser) {return ticketMapper.findAllPerUser(idUser);}
 
 
     @PostMapping(value = "/addTicket/confirmed", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -86,6 +77,14 @@ public class TicketApi {
         }
         purchaseSummary(ticketsId,idUser);
         return tickets;
+    }
+
+    @PostMapping(value = "/cancelTicket/confirmed", produces = MediaType.APPLICATION_JSON_VALUE)
+    void cancelTicket(@RequestParam int[] idTicket) {
+        for(int i=0; i< idTicket.length; i++) {
+            ticketMapper.cancelTicket(idTicket[i]);
+        }
+
     }
 
     @GetMapping("/getTickets/")

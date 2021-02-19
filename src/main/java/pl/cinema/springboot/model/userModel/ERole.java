@@ -1,4 +1,4 @@
-package pl.cinema.springboot.userModel;
+package pl.cinema.springboot.model.userModel;
 
 public enum ERole {
     ROLE_USER,

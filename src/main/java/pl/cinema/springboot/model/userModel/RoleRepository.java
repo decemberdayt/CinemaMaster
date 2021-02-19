@@ -1,4 +1,4 @@
-package pl.cinema.springboot.userModel;
+package pl.cinema.springboot.model.userModel;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;

@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.cinema.springboot.userModel.User;
-import pl.cinema.springboot.userModel.UserRepository;
+import pl.cinema.springboot.model.userModel.User;
+import pl.cinema.springboot.model.userModel.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

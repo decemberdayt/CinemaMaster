@@ -24,20 +24,20 @@ export class CinemaService {
   }
 
   getActors(): Observable<Array<Actor>>{
-    return this.http.get<Array<Actor>>('http://localhost:8080/actors/');
+    return this.http.get<Array<Actor>>('http://localhost:8080/api/actors/');
   }
 
   getShows(): Observable<Array<Show>>{
-    return this.http.get<Array<Show>>('http://localhost:8080/movies/allShows');
+    return this.http.get<Array<Show>>('http://localhost:8080/api/movies/allShows');
   }
 
   getMovies() : Observable<Array<Movie>>{
-    return this.http.get<Array<Movie>>('http://localhost:8080/movies');
+    return this.http.get<Array<Movie>>('http://localhost:8080/api/movies');
   }
 
   getSeatsByHall(idHall : number) : Observable<Array<Seat>>{
     const param = new HttpParams().set('idHall', idHall +'');
-    return this.http.get<Array<Seat>>('http://localhost:8080/seats/idHall', { params: param });
+    return this.http.get<Array<Seat>>('http://localhost:8080/api/seats/idHall', { params: param });
   }
 
   getSeatsByShow(idShow : number) : Observable<Array<Seat>>{
@@ -45,7 +45,7 @@ export class CinemaService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token.getToken()
     });
-    return this.http.get<Array<Seat>>('http://localhost:8080/seats/occupancy/' + idShow, {headers: reqHeader});
+    return this.http.get<Array<Seat>>('http://localhost:8080/api/seats/occupancy/' + idShow, {headers: reqHeader});
   }
 
   postTicket(ticketList: Array<Ticket>) : Observable<Array<Ticket>>{
@@ -54,7 +54,7 @@ export class CinemaService {
       'Authorization': 'Bearer ' + this.token.getToken()
     });
     const param = new HttpParams().set('idUser', this.token.getUser().id);
-      return this.http.post<Array<Ticket>>('http://localhost:8080/tickets/addTickets/confirmed', ticketList, {headers: reqHeader, params: param});
+      return this.http.post<Array<Ticket>>('http://localhost:8080/api/tickets/addTickets/confirmed', ticketList, {headers: reqHeader, params: param});
   }
 
   getPurchaseDetails(idTicket: number): Observable<PurchaseDetails>{
@@ -64,6 +64,6 @@ export class CinemaService {
     });
     const param = new HttpParams().set('idTicket', idTicket +'');
     param.append('idUser', this.token.getUser().id);
-    return this.http.get<PurchaseDetails>('http://localhost:8080/tickets/getTickets', { headers: reqHeader, params: param});
+    return this.http.get<PurchaseDetails>('http://localhost:8080/api/tickets/getTickets', { headers: reqHeader, params: param});
   }
 }

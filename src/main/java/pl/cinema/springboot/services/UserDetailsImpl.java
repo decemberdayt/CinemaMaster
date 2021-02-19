@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.cinema.springboot.userModel.User;
+import pl.cinema.springboot.model.userModel.User;
 
 import java.util.Collection;
 import java.util.List;

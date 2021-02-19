@@ -15,7 +15,7 @@ import pl.cinema.springboot.payload.LoginRequest;
 import pl.cinema.springboot.payload.MessageResponse;
 import pl.cinema.springboot.payload.SignupRequest;
 import pl.cinema.springboot.services.UserDetailsImpl;
-import pl.cinema.springboot.userModel.*;
+import pl.cinema.springboot.model.userModel.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;

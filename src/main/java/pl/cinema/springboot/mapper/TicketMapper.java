@@ -3,6 +3,7 @@ package pl.cinema.springboot.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.lang.Nullable;
 import pl.cinema.springboot.model.Seat;
 import pl.cinema.springboot.model.Show;
@@ -14,8 +15,27 @@ import java.util.List;
 @Mapper
 public interface TicketMapper {
 
-    @Select("SELECT * FROM ANONYMOUS.TICKET")
-    List<Ticket> findAll();
+    @Select("SELECT \n" +
+            "    T.IDTICKET\n" +
+            "    , T.IDSHOW\n" +
+            "    ,T.IDSEAT\n" +
+            "    , T.IDHALL\n" +
+            "    , T.BUYERNAME\n" +
+            "    , T.BUYERSURNAME\n" +
+            "    , CASE\n" +
+            "        WHEN S.SHOWTIME > SYSTIMESTAMP THEN T.STATUS\n" +
+            "        ELSE 'OVERDUE'\n" +
+            "      END AS STATUS\n" +
+            "    , T.PRICE\n" +
+            "    , T.REDUCED\n" +
+            "FROM ANONYMOUS.TICKET T\n" +
+            "INNER JOIN ANONYMOUS.USER_TICKETS UT\n" +
+            "ON\n" +
+            "    T.IDTICKET = UT.IDTICKET\n" +
+            "INNER JOIN ANONYMOUS.SHOW S\n" +
+            "    ON S.IDSHOW = T.IDSHOW\n" +
+            "WHERE UT.IDUSER = #{idUser}")
+    @Nullable List<Ticket> findAllPerUser(int idUser);
 
     @Insert("INSERT INTO ANONYMOUS.TICKET (IDTICKET\n" +
             ",IDSHOW\n" +
@@ -37,6 +57,12 @@ public interface TicketMapper {
             ")\n" +
             "WHERE ROWNUM = 1")
     @Nullable Ticket findMaxId();
+
+    @Update("UPDATE ANONYMOUS.TICKET\n" +
+            "SET STATUS = 'CANCELLED'\n" +
+            "WHERE \n" +
+            "    IDTICKET IN (#{idTicket})")
+    void cancelTicket(int idTicket);
 
     @Select("SELECT \n" +
             "    T.IDTICKET\n" +
@@ -72,6 +98,5 @@ public interface TicketMapper {
             "WHERE UT.IDUSER = #{idUser}" +
             "   AND T.IDTICKET = #{idTicket}")
     public PurchaseSummary getPurchaseSummary(int idTicket, int idUser);
-
 
 }

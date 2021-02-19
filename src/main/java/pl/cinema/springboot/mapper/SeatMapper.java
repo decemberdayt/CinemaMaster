@@ -20,6 +20,7 @@ public interface SeatMapper {
             "ON\n" +
             "    S.IDSEAT = T.IDSEAT\n" +
             "    AND T.IDSHOW = #{idShow}\n" +
+            "    AND T.STATUS != 'CANCELLED'\n" +
             "WHERE\n" +
             "    S.IDHALL = ( SELECT IDHALL FROM ANONYMOUS.SHOW WHERE IDSHOW = #{idShow} )\n" +
             "GROUP BY S.HALLROW, S.IDSEAT, CASE WHEN T.IDTICKET IS NULL THEN 0 ELSE 1 END")
