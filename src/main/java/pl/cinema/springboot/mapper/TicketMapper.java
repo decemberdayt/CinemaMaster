@@ -5,8 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.lang.Nullable;
-import pl.cinema.springboot.model.Seat;
-import pl.cinema.springboot.model.Show;
 import pl.cinema.springboot.model.Ticket;
 import pl.cinema.springboot.model.views.PurchaseSummary;
 
@@ -78,6 +76,7 @@ public interface TicketMapper {
             "    , H.HALLNAME\n" +
             "    , T.IDSEAT\n" +
             "    , S.HALLROW\n" +
+            "    , T.STATUS\n" +
             "FROM ANONYMOUS.USER_TICKETS UT\n" +
             "INNER JOIN ANONYMOUS.TICKET T\n" +
             "ON\n" +
@@ -98,5 +97,40 @@ public interface TicketMapper {
             "WHERE UT.IDUSER = #{idUser}" +
             "   AND T.IDTICKET = #{idTicket}")
     public PurchaseSummary getPurchaseSummary(int idTicket, int idUser);
+
+    @Select("SELECT \n" +
+            "    T.IDTICKET\n" +
+            "    , T.BUYERNAME\n" +
+            "    , T.BUYERSURNAME\n" +
+            "    , T.PRICE\n" +
+            "    , T.REDUCED\n" +
+            "    , SH.SHOWDATE\n" +
+            "    , SH.SHOWTIME\n" +
+            "    , M.TITLE\n" +
+            "    , M.SUBTITLE\n" +
+            "    , M.DURATIONMIN\n" +
+            "    , H.HALLNAME\n" +
+            "    , T.IDSEAT\n" +
+            "    , S.HALLROW\n" +
+            "    , T.STATUS\n" +
+            "FROM ANONYMOUS.USER_TICKETS UT\n" +
+            "INNER JOIN ANONYMOUS.TICKET T\n" +
+            "ON\n" +
+            "    T.IDTICKET = UT.IDTICKET\n" +
+            "INNER JOIN ANONYMOUS.SHOW SH\n" +
+            "ON\n" +
+            "    SH.IDSHOW = T.IDSHOW\n" +
+            "INNER JOIN ANONYMOUS.HALL H\n" +
+            "ON\n" +
+            "    H.IDHALL = T.IDHALL\n" +
+            "INNER JOIN ANONYMOUS.MOVIE M\n" +
+            "ON\n" +
+            "    M.IDMOVIE = SH.IDMOVIE\n" +
+            "INNER JOIN ANONYMOUS.SEAT S\n" +
+            "ON\n" +
+            "    S.IDSEAT = T.IDSEAT\n" +
+            "    AND H.IDHALL = S.IDHALL\n" +
+            "WHERE UT.IDUSER = #{idUser}")
+    @Nullable public List<PurchaseSummary> getAllPurchasePerUser (int idUser);
 
 }

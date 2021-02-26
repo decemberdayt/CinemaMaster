@@ -1,5 +1,7 @@
 package pl.cinema.springboot.services;
 
+import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Service;
 import pl.cinema.springboot.mail.EmailSender;
 import pl.cinema.springboot.mail.GeneratePdfReport;
 import pl.cinema.springboot.mapper.TicketMapper;
@@ -14,12 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TicketServiceImpl {
 
     private TicketMapper ticketMapper;
     private UserTicketsMapper userTicketsMapper;
     private EmailSender emailSender;
     private UserRepository userRepository;
+
+    public TicketServiceImpl(TicketMapper ticketMapper, UserTicketsMapper userTicketsMapper, EmailSender emailSender, UserRepository userRepository) {
+        this.ticketMapper = ticketMapper;
+        this.userTicketsMapper = userTicketsMapper;
+        this.emailSender = emailSender;
+        this.userRepository = userRepository;
+    }
 
     public int getNextIdTicket()
     {
@@ -66,11 +76,8 @@ public class TicketServiceImpl {
         return tickets;
     }
 
-    public void cancelTicket(int[] idTicket) {
-        for(int i=0; i< idTicket.length; i++) {
-            ticketMapper.cancelTicket(idTicket[i]);
-        }
-
+    public void cancelTicket(int idTicket) {
+            ticketMapper.cancelTicket(idTicket);
     }
 
     public List<PurchaseSummary> purchaseSummary(int[] idTicket, int idUser) {
@@ -82,4 +89,10 @@ public class TicketServiceImpl {
         }
         return var;
     }
+
+    @Nullable
+    public List<PurchaseSummary> getAllPurchasePerUser (int idUser) {
+        return ticketMapper.getAllPurchasePerUser(idUser);
+    }
+
 }

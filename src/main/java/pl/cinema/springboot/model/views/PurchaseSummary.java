@@ -17,10 +17,11 @@ public class PurchaseSummary {
     public String hallName;
     public int idSeat;
     public int hallRow;
+    public String status;
 
     public PurchaseSummary() {};
 
-    public PurchaseSummary(int idTicket, String buyerName, String buyerSurname, float price, int reduced, Date showDate, Time showTime, String title, String subTitle, int durationMin, String hallName, int idSeat, int hallRow) {
+    public PurchaseSummary(int idTicket, String buyerName, String buyerSurname, float price, int reduced, Date showDate, Time showTime, String title, String subTitle, int durationMin, String hallName, int idSeat, int hallRow, String status) {
         this.idTicket = idTicket;
         this.buyerName = buyerName;
         this.buyerSurname = buyerSurname;
@@ -34,6 +35,7 @@ public class PurchaseSummary {
         this.hallName = hallName;
         this.idSeat = idSeat;
         this.hallRow = hallRow;
+        this.status = status;
     }
 
     public int getIdTicket() {
@@ -86,5 +88,9 @@ public class PurchaseSummary {
 
     public int getHallRow() {
         return hallRow;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

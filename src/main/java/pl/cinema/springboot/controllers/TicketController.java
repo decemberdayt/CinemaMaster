@@ -33,8 +33,15 @@ public class TicketController {
     }
 
     @GetMapping("/all")
-    public List<Ticket> getAll(@RequestParam int idUser) {
-        return ticketService.getAll(idUser);
+    public List<PurchaseSummary> getAll(@RequestParam int idUser) {
+        try {
+            return ticketService.getAllPurchasePerUser(idUser);
+        } catch (Exception e) {
+            PurchaseSummary noTickets = new PurchaseSummary();
+            List<PurchaseSummary> noTicketList = new ArrayList<>();
+            noTicketList.add(noTickets);
+            return noTicketList;
+        }
     }
 
 
@@ -50,7 +57,7 @@ public class TicketController {
     }
 
     @PostMapping(value = "/cancelTicket/confirmed", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void cancelTicket(@RequestParam int[] idTicket) {
+    public void cancelTicket(@RequestParam int idTicket) {
         ticketService.cancelTicket(idTicket);
     }
 
