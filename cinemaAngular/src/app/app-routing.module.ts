@@ -10,6 +10,7 @@ import {BoardAdminComponent} from "./board-admin/board-admin.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {BoardUserComponent} from "./board-user/board-user.component";
 import {BoardModeratorComponent} from "./board-moderator/board-moderator.component";
+import { ReservationsComponent } from './reservations/reservations.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  {path: 'reservations', component: ReservationsComponent},
 ];
 
 @NgModule({

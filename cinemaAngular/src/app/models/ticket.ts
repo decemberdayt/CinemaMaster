@@ -3,8 +3,8 @@ export interface Ticket{
   idShow?: number,
   idSeat?: number,
   idHall?: number,
-  buyerName?: string,
-  buyerSurname?: string,
+  buyerName: string,
+  buyerSurname: string,
   status?: string,
   price?: number,
   reduced?: number

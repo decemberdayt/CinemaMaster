@@ -2,20 +2,12 @@ package pl.cinema.springboot.controllers;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import pl.cinema.springboot.mail.GeneratePdfReport;
-import pl.cinema.springboot.mail.EmailSender;
-import pl.cinema.springboot.mapper.TicketMapper;
-import pl.cinema.springboot.mapper.UserTicketsMapper;
 import pl.cinema.springboot.model.Ticket;
 import pl.cinema.springboot.model.views.PurchaseSummary;
-import pl.cinema.springboot.model.userModel.User;
-import pl.cinema.springboot.model.userModel.UserRepository;
 import pl.cinema.springboot.services.TicketServiceImpl;
 
-import javax.activation.DataSource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -57,8 +49,8 @@ public class TicketController {
     }
 
     @PostMapping(value = "/cancelTicket/confirmed", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void cancelTicket(@RequestParam int idTicket) {
-        ticketService.cancelTicket(idTicket);
+    public Ticket cancelTicket(@RequestParam int idTicket) {
+        return ticketService.cancelTicket(idTicket);
     }
 
     @GetMapping("/getTickets/")

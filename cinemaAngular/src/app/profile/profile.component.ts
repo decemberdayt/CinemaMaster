@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../services/token-storage.service';
+import { CinemaService } from '../services/cinema.service';
+import { Ticket } from '../models/ticket';
 
 @Component({
   selector: 'app-profile',

@@ -1,18 +1,19 @@
 <body>
 <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap = "20px">
-  <div fxLayout = "column" fxLayoutAlign = "space-around">
+  <div id="menu" fxLayout = "column" fxLayoutAlign = "space-around">
     <h1>Movie List</h1>
         <form id="calendar">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Choose date</mat-label>
-            <input matInput [matDatepicker]="picker" (dateChange)= "dateChange($event.value)">
+            <input matInput [min]= "actualDate" [matDatepicker]="picker" (dateChange)= "dateChange($event.value)">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </form>
   </div>
   <div>
-    <app-movies-list [movies] ="moviesList" [shows] = "showList" [showDate] = "pickedDate" (eventBuy) = "selected($event)"></app-movies-list>
+    <app-movies-list [movies] ="moviesList" [shows] = "showList" [showDate] = "pickedDate"
+      (eventBuy) = "selected($event)" [isDatePicked] = "isDatePicked" [actualDate] = "actualDate" [isLoggedIn] = "isLoggedIn"></app-movies-list>
   </div>
 </div>
 </body>

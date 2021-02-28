@@ -46,14 +46,25 @@ public interface TicketMapper {
             ",REDUCED) VALUES (#{idTicket},#{idShow},#{idSeat},#{idHall},#{buyerName},#{buyerSurname},#{status},#{price},#{reduced})")
     void insert(Ticket ticket);
 
-    @Select("SELECT *\n" +
+    @Select("SELECT IDTICKET\n" +
+            ",IDSHOW\n" +
+            ",IDSEAT\n" +
+            ",IDHALL\n" +
+            ",BUYERNAME\n" +
+            ",BUYERSURNAME\n" +
+            ",STATUS\n" +
+            ",PRICE\n" +
+            ",REDUCED FROM ANONYMOUS.TICKET WHERE IDTICKET = #{idTicket})")
+    @Nullable Ticket findTicketById(int idTicket);
+
+    @Select("SELECT T.*\n" +
             "FROM \n" +
             "(\n" +
             "    SELECT * \n" +
             "    FROM ANONYMOUS.TICKET \n" +
             "    ORDER BY IDTICKET DESC\n" +
-            ")\n" +
-            "WHERE ROWNUM = 1")
+            ") AS T\n" +
+            "LIMIT 1")
     @Nullable Ticket findMaxId();
 
     @Update("UPDATE ANONYMOUS.TICKET\n" +

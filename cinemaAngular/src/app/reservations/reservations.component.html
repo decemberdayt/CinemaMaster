@@ -1,0 +1,14 @@
+<mat-card class="listOfTickets" *ngFor= "let ticket of ticketsList">
+  <h4><strong>Tittle</strong></h4>
+  Ttittle: {{ticket.title}}<br>
+  Date: {{ticket.showDate}} {{ticket.showTime}} <br>
+  Hall: {{ticket.hallName}}<br>
+  Seat: {{ticket.idSeat}}<br>
+  Price: {{ticket.price}}<br>
+  Status: {{ticket.status}}<br>
+  <mat-card-actions *ngIf = "ticket.status == 'reserved'">
+    <button mat-raised-button color="primary" (click)= "cancelTicket(ticket.idTicket)">
+      Cancel reservation
+    </button>
+  </mat-card-actions>
+</mat-card>

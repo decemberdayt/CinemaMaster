@@ -16,19 +16,28 @@ export class MoviesComponent implements OnInit {
 
   moviesList : Array<Movie> = [];
   currentUser: any;
+  isLoggedIn = false;
 
-  constructor(private httpService: CinemaService, private buy: TicketService, private router: Router, public datepipe: DatePipe, private token: TokenStorageService) { }
+  constructor(private httpService: CinemaService
+              ,private buy: TicketService
+              ,private router: Router
+              ,public datepipe: DatePipe
+              ,private token: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getMovies();
     this.getShows();
     this.pickedDate = new Date();
     this.pickedDate = this.datepipe.transform(this.pickedDate, 'yyyy-MM-dd') as unknown as Date;
+    this.actualDate = this.pickedDate;
     this.currentUser = this.token.getUser();
+    this.isLoggedIn = !!this.token.getToken();
   }
 
   showList: Array<Show> = [];
   pickedDate: Date;
+  actualDate: Date;
+  isDatePicked = false;
 
   getShows(){
     this.httpService.getShows().subscribe(shows =>{
@@ -50,6 +59,7 @@ export class MoviesComponent implements OnInit {
   dateChange(event: any){
     const data = event;
     this.pickedDate = this.datepipe.transform(data, 'yyyy-MM-dd') as unknown as Date;
+    this.isDatePicked = true;
   }
 
 }

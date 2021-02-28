@@ -76,8 +76,9 @@ public class TicketServiceImpl {
         return tickets;
     }
 
-    public void cancelTicket(int idTicket) {
+    public Ticket cancelTicket(int idTicket) {
             ticketMapper.cancelTicket(idTicket);
+            return ticketMapper.findTicketById(idTicket);
     }
 
     public List<PurchaseSummary> purchaseSummary(int[] idTicket, int idUser) {

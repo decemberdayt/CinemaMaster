@@ -31,8 +31,6 @@ export class TicketService {
     this.buyerName = value;
   }
 
-
-
   setBuyerSurname(value: string){
     this.buyerSurname = value;
   }

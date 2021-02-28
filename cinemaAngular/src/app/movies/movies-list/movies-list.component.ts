@@ -12,6 +12,11 @@ export class MoviesListComponent implements OnInit {
   @Output()
   eventBuy = new EventEmitter<Show>();
 
+  @Input()
+  isLoggedIn: boolean;
+
+  tryToBuy = false;
+
   constructor() {
   }
 
@@ -25,10 +30,37 @@ export class MoviesListComponent implements OnInit {
   shows: Array<Show> = [];
 
   @Input()
+  isDatePicked: boolean
+
+  @Input()
+  actualDate: Date
+
+  @Input()
   showDate: Date;
 
   select(show : Show){
-    this.eventBuy.emit(show);
+    if(this.isLoggedIn){
+      this.eventBuy.emit(show);
+    }
+    this.tryToBuy = true;
+  }
+
+  hideMovie(movieId : number) : boolean {
+      let showsPerMovie = 0
+      let futhureShowsPerMovie = 0
+      for (var show of this.shows){
+        if (show.idMovie == movieId && show.showDate == this.showDate)
+        showsPerMovie =+ 1
+      }
+
+      for (var show of this.shows){
+        if (show.idMovie == movieId && show.showDate >= this.actualDate)
+        futhureShowsPerMovie =+ 1
+      }
+
+      if (futhureShowsPerMovie > 0 && (showsPerMovie > 0 || !this.isDatePicked))
+        return false
+      else return true;
   }
 
 }

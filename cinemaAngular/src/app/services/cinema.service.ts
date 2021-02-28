@@ -8,6 +8,8 @@ import { Ticket } from '../models/ticket';
 import { Movie } from '../models/movie';
 import { PurchaseDetails } from '../models/purchseDetails';
 import {TokenStorageService} from "./token-storage.service";
+import { tick } from '@angular/core/testing';
+import { TicketService } from './ticket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -66,4 +68,29 @@ export class CinemaService {
     param.append('idUser', this.token.getUser().id);
     return this.http.get<PurchaseDetails>('http://localhost:8080/api/tickets/getTickets', { headers: reqHeader, params: param});
   }
+
+  getUserTickets(): Observable<Array<PurchaseDetails>>{
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.token.getToken()
+    });
+    console.log(reqHeader);
+    const param = new HttpParams().set('idUser', this.token.getUser().id);
+    return this.http.get<Array<PurchaseDetails>>('http://localhost:8080/api/tickets/all', { headers: reqHeader, params: param});
+  }
+
+  cancelTicket(idTicket: number): Observable<Ticket>{
+    const reqHeader = {
+      headers : new HttpHeaders({
+        'Authorization': 'Bearer ' + this.token.getToken(),
+        'Content-Type': 'application/json'
+      })
+    }
+    const param = new HttpParams().set('idTicket', idTicket + '');
+    var header = reqHeader;
+    //console.log(reqHeader.getAll('Authorization'))
+    return this.http.post<Ticket>('http://localhost:8080/api/tickets/cancelTicket/confirmed', { headers: reqHeader, params: param});
+  }
 }
+
+

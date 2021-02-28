@@ -3,7 +3,8 @@ package pl.cinema.springboot.model.views;
 import java.sql.Time;
 import java.sql.Date;
 
-public class PurchaseSummary {
+public class
+PurchaseSummary {
     public int idTicket;
     public String buyerName;
     public String buyerSurname;

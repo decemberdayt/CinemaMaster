@@ -88,18 +88,18 @@ export class PurchaseComponent implements OnInit {
 	 this.seatsList = this.buy.seats;
 	 console.log(this.seatsList);
 	 for(let seat of this.seatsList){
-	 let ticket: Ticket = {
-	 idTicket: 1,
-	 idShow: this.show.idShow,
-	 idHall: this.show.idHall,
-	 idSeat: seat.idSeat,
-	 buyerName: this.buyerName,
-	 buyerSurname: this.buyerSurename,
-	 status: 'reserved',
-	 price: 20,
-	 reduced: 0
-	 };
-	 this.ticketList.push(ticket);
+    let ticket: Ticket = {
+    idTicket: 1,
+    idShow: this.show.idShow,
+    idHall: this.show.idHall,
+    idSeat: seat.idSeat,
+    buyerName: this.buyerName,
+    buyerSurname: this.buyerSurename,
+    status: 'reserved',
+    price: 20,
+    reduced: 0
+    };
+    this.ticketList.push(ticket);
 	 }
 	 this.addTicket();
  }

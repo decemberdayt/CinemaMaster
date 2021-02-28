@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$primary: (
+ Main:#2c313c,
+ Light:#555a66,
+ Dark: #020816,
+ contrast: (
+  Main: #ede9e6,
+  Light: #ede9e6,
+  Dark: #ede9e6
+ ));
+$accent: (
+ Main: #c05d4f,
+ Light: #f68c7b,
+ Dark: #8b2f26,
+ contrast: (
+   Main: #ffffff,
+   Light: #ffffff,
+   Dark: #ffffff
+  ));
+$warn:$mat-red;
+
+$cinema-app-primary: mat-palette($primary, Main, Light, Dark);
+$cinema-app-accent: mat-palette($accent, Main, Light, Dark);
+$cinema-app-warn: mat-palette($warn, 200, 100, 300);
+
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as `color` or `typography`.
+$cinema-app-theme: mat-light-theme((
+  color: (
+    primary: $cinema-app-primary,
+    accent: $cinema-app-accent,
+    warn: $cinema-app-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($cinema-app-theme);
