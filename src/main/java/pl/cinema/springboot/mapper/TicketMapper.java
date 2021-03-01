@@ -54,24 +54,24 @@ public interface TicketMapper {
             ",BUYERSURNAME\n" +
             ",STATUS\n" +
             ",PRICE\n" +
-            ",REDUCED FROM ANONYMOUS.TICKET WHERE IDTICKET = #{idTicket})")
+            ",REDUCED FROM ANONYMOUS.TICKET WHERE IDTICKET = #{idTicket}")
     @Nullable Ticket findTicketById(int idTicket);
 
-    @Select("SELECT T.*\n" +
+    @Select("SELECT *\n" +
             "FROM \n" +
             "(\n" +
             "    SELECT * \n" +
             "    FROM ANONYMOUS.TICKET \n" +
             "    ORDER BY IDTICKET DESC\n" +
-            ") AS T\n" +
-            "LIMIT 1")
-    @Nullable Ticket findMaxId();
+            ")\n" +
+            "WHERE ROWNUM = 1")
+    @Nullable public Ticket findMaxId();
 
     @Update("UPDATE ANONYMOUS.TICKET\n" +
             "SET STATUS = 'CANCELLED'\n" +
             "WHERE \n" +
             "    IDTICKET IN (#{idTicket})")
-    void cancelTicket(int idTicket);
+    public void cancelTicket(int idTicket);
 
     @Select("SELECT \n" +
             "    T.IDTICKET\n" +

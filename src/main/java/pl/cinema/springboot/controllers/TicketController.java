@@ -49,7 +49,7 @@ public class TicketController {
     }
 
     @PostMapping(value = "/cancelTicket/confirmed", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Ticket cancelTicket(@RequestParam int idTicket) {
+    public Ticket cancelTicket(@RequestBody int idTicket) {
         return ticketService.cancelTicket(idTicket);
     }
 
