@@ -1,21 +1,21 @@
 <body>
-<div fxLayoutGap = "50px">
+<div fxLayoutGap = "100px">
 <mat-horizontal-stepper  color="accent" #stepper linear  iseditable>
   <mat-step [completed]= "firstStepCompleted">
-    <app-purchase-form (formIsCorrect)= "isFirstStepCompleted($event)"></app-purchase-form>
-    <button id="next" mat-flat-button matStepperNext color="accent" *ngIf= "firstStepCompleted">Next</button>
+    <app-purchase-form class="step" (formIsCorrect)= "isFirstStepCompleted($event)"></app-purchase-form>
+    <button class="form-button" mat-flat-button matStepperNext color="accent" *ngIf= "firstStepCompleted">Next</button>
   </mat-step>
   <mat-step [completed]= "secondStepCompleted">
-    <app-purchase-seats [seats] = "seatsList" [rows] = "rows" (formIsCorrect)= "isSecondStepCompleted($event)"></app-purchase-seats>
-    <button mat-flat-button matStepperPrevious color="accent">
+    <app-purchase-seats class="step" [seats] = "seatsList" [rows] = "rows" (formIsCorrect)= "isSecondStepCompleted($event)"></app-purchase-seats>
+    <button class="form-button" mat-flat-button matStepperPrevious color="accent">
       Previous
      </button>
-    <button mat-flat-button matStepperNext color="accent" (click)= "buyTickets()" *ngIf= "secondStepCompleted">
+    <button class="form-button" mat-flat-button matStepperNext color="accent" (click)= "buyTickets()" *ngIf= "secondStepCompleted">
       Confirm reservation
      </button>
   </mat-step>
   <mat-step>
-    <app-confirmation [buyedTickets] = "buyedTicket" [show] = "show"></app-confirmation>
+    <app-confirmation class="step" [buyedTickets] = "buyedTicket" [show] = "show"></app-confirmation>
   </mat-step>
   </mat-horizontal-stepper>
 </div>

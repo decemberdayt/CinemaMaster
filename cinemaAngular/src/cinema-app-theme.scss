@@ -28,7 +28,7 @@ $warn:$mat-red;
 
 $cinema-app-primary: mat-palette($primary, Main, Light, Dark);
 $cinema-app-accent: mat-palette($accent, Main, Light, Dark);
-$cinema-app-warn: mat-palette($warn, 200, 100, 300);
+$cinema-app-warn: mat-palette($mat-red, 500, 600, 700);
 
 
 // Create the theme object. A theme consists of configurations for individual

@@ -57,15 +57,15 @@ public interface TicketMapper {
             ",REDUCED FROM ANONYMOUS.TICKET WHERE IDTICKET = #{idTicket}")
     @Nullable Ticket findTicketById(int idTicket);
 
-    @Select("SELECT *\n" +
+    @Select("SELECT T.*\n" +
             "FROM \n" +
             "(\n" +
             "    SELECT * \n" +
             "    FROM ANONYMOUS.TICKET \n" +
             "    ORDER BY IDTICKET DESC\n" +
-            ")\n" +
-            "WHERE ROWNUM = 1")
-    @Nullable public Ticket findMaxId();
+            ") AS T\n" +
+            "LIMIT 1")
+    @Nullable Ticket findMaxId();
 
     @Update("UPDATE ANONYMOUS.TICKET\n" +
             "SET STATUS = 'CANCELLED'\n" +
@@ -141,7 +141,8 @@ public interface TicketMapper {
             "ON\n" +
             "    S.IDSEAT = T.IDSEAT\n" +
             "    AND H.IDHALL = S.IDHALL\n" +
-            "WHERE UT.IDUSER = #{idUser}")
+            "WHERE UT.IDUSER = #{idUser}\n" +
+            "ORDER BY SH.SHOWDATE, SH.SHOWTIME")
     @Nullable public List<PurchaseSummary> getAllPurchasePerUser (int idUser);
 
 }

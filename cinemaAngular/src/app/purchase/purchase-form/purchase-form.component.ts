@@ -25,12 +25,25 @@ export class PurchaseFormComponent implements OnInit {
   }
 
   formIsValid() {
-    console.log('formIsValid');
-    if(this.buyerName!= null && this.buyerSurname!= null && this.ticketsNumber!= null){
+    let buyerNameValid: boolean = false;
+    let buyerSurnameValid: boolean = false;
+    let ticketNumberValid: boolean = false;
+
+    if(this.buyerName != null && this.buyerName.length >= 1){
+      buyerNameValid = true;
+    }
+    if(this.buyerSurname != null && this.buyerSurname.length >= 1){
+      buyerSurnameValid = true;
+    }
+    if(!isNaN(this.ticketsNumber) && this.ticketsNumber >= 1){
+      ticketNumberValid = true;
+    }
+    if(buyerNameValid && buyerSurnameValid && ticketNumberValid){
       this.formIsCorrect.emit(true);
       this.buy.setBuyerName(this.buyerName);
       this.buy.setBuyerSurname(this.buyerSurname);
       this.buy.setNumberOfTickets(this.ticketsNumber);
     }
+    else this.formIsCorrect.emit(false);
   }
 }

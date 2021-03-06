@@ -76,6 +76,7 @@ export class PurchaseSeatsComponent implements OnInit, OnChanges {
       this.formIsCorrect.emit(true);
       this.buy.setSeatsList(this.seats.filter((seat: Seat) => seat.selected == true));
     }
+    else this.formIsCorrect.emit(false);
   }
 
 }

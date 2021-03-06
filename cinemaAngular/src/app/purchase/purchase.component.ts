@@ -72,11 +72,17 @@ export class PurchaseComponent implements OnInit {
   }
 
   isFirstStepCompleted(event: any){
-    this.firstStepCompleted = true;
+    if(event == true){
+      this.firstStepCompleted = true;
+    }
+    else this.firstStepCompleted = false;
   }
 
   isSecondStepCompleted(event: any){
-    this.secondStepCompleted = true;
+    if(event == true){
+      this.secondStepCompleted = true;
+    }
+    else this.secondStepCompleted = false;
   }
 
    buyTickets() : void{
