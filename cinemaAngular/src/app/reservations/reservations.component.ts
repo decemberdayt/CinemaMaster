@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { tick } from '@angular/core/testing';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { PurchaseDetails } from '../models/purchseDetails';
 import { Ticket } from '../models/ticket';
 import { PurchaseComponent } from '../purchase/purchase.component';
 import { CinemaService } from '../services/cinema.service';
+import { TicketService } from '../services/ticket.service';
 
 @Component({
   selector: 'app-reservations',
@@ -12,10 +16,11 @@ import { CinemaService } from '../services/cinema.service';
 export class ReservationsComponent implements OnInit {
 
 
-  ticketsList: Array<PurchaseDetails> = []
-  canceledTicket: Ticket;
+  ticketsList: Array<PurchaseDetails> = [];
+  canceledTicket: Array<PurchaseDetails> = [];
+  canceledTicketId: number;
 
-  constructor(private httpService: CinemaService) { }
+  constructor(private httpService: CinemaService,private router: Router, private cancel: TicketService) { }
 
   ngOnInit(): void {
     this.getAllUserTickets();
@@ -28,9 +33,12 @@ export class ReservationsComponent implements OnInit {
   }
 
   cancelTicket(idTicket : number){
-    this.httpService.cancelTicket(idTicket).subscribe((cancelTicket) =>{
-      this.canceledTicket = cancelTicket;
-    });
+    this.canceledTicket = this.ticketsList.filter((ticket: PurchaseDetails) => ticket.idTicket = idTicket);
+    this.cancel.setCancelTicketId(idTicket);
+    this.cancel.setCancelTicketDetails(this.canceledTicket[0]);
+    this.router.navigateByUrl('cancel');
   }
 
+
 }
+

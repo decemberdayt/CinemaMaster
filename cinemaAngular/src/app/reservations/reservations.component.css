@@ -1,0 +1,22 @@
+.listOfTickets {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+h2 {
+  margin-left: 10pt;
+  background: #c05d4f;
+  width: 150pt;
+  padding: 5pt;
+  text-align: center;
+  color: #ede9e6;
+  border-radius: 0pt 0pt 10pt 10pt;
+}
+h3 {
+  margin-left: 10pt;
+  background: #c05d4f;
+  width: 100pt;
+  padding: 5pt;
+  text-align: center;
+  color: #ede9e6;
+  border-radius: 10pt 10pt 10pt 10pt;
+}

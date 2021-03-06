@@ -1,0 +1,17 @@
+<body>
+  <div class="cancel-warning" fxLayout="column" fxLayoutAlign="space-around start" >
+  <h2>Are you sure that you want to cancel this reservation?</h2>
+  <div class="reservation-details">
+    <h3><strong>{{reservationDetails.title}}</strong></h3>
+    Date: {{reservationDetails.showDate}} {{reservationDetails.showTime}} <br>
+    Hall: {{reservationDetails.hallName}}<br>
+    Seat number: {{reservationDetails.idSeat}}<br>
+    Price: {{reservationDetails.price}}<br>
+    Buyer: {{reservationDetails.buyerName}} {{reservationDetails.buyerSurname}}
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="50px">
+  <button mat-raised-button color="accent" (click) = "backToReservations()">No</button>
+  <button mat-raised-button color="accent" (click) = "cancelReservation()">Yes</button>
+</div>
+</div>
+</body>

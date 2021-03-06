@@ -16,3 +16,9 @@ h1 {
 #calendar mat-label {
   color: #ede9e6;
 }
+#calendar mat-form-field {
+  color: #ede9e6;
+}
+#calendar mat-datepicker-toggle {
+  color: #ede9e6;
+}

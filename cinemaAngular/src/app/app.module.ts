@@ -35,6 +35,8 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CancelReservationComponent } from './reservations/cancel-reservation/cancel-reservation.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
     BoardAdminComponent,
     BoardUserComponent,
     BoardModeratorComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    CancelReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
     MatDatepickerModule,
     FormsModule,
     MatStepperModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ],
   providers: [
     CinemaService,

@@ -41,6 +41,9 @@
   background-position: top;
   background-size: 900pt;
 }
+#created {
+  text-align: center;
+}
 .navbar a:link {
   border: solid 1pt #c05d4f;
   color: #c05d4f;

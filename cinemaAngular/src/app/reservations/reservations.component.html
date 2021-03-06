@@ -1,14 +1,40 @@
-<mat-card class="listOfTickets" *ngFor= "let ticket of ticketsList">
-  <h4><strong>Tittle</strong></h4>
-  Ttittle: {{ticket.title}}<br>
+<body>
+<div class="container">
+  <h2>Reserved tickets</h2>
+  <div *ngFor= "let ticket of ticketsList">
+<mat-card class="listOfTickets" *ngIf = "ticket.status == 'reserved'">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap = "100px">
+  <h4><strong>{{ticket.title}}</strong></h4>
+  <div>
   Date: {{ticket.showDate}} {{ticket.showTime}} <br>
   Hall: {{ticket.hallName}}<br>
-  Seat: {{ticket.idSeat}}<br>
+  Seat number: {{ticket.idSeat}}<br>
   Price: {{ticket.price}}<br>
   Status: {{ticket.status}}<br>
-  <mat-card-actions *ngIf = "ticket.status == 'reserved'">
-    <button mat-raised-button color="primary" (click)= "cancelTicket(ticket.idTicket)">
+</div>
+  <mat-card-actions>
+    <button mat-raised-button color="accent" (click)= "cancelTicket(ticket.idTicket)">
       Cancel reservation
     </button>
   </mat-card-actions>
+</div>
 </mat-card>
+</div>
+<h3 class="history">History</h3>
+<div *ngFor= "let ticket of ticketsList">
+  <mat-card class="listOfTickets" *ngIf = "ticket.status != 'reserved'">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap = "100px">
+    <h4><strong>{{ticket.title}}</strong></h4>
+    <div>
+    Date: {{ticket.showDate}} {{ticket.showTime}} <br>
+    Hall: {{ticket.hallName}}<br>
+    Seat number: {{ticket.idSeat}}<br>
+    Price: {{ticket.price}}<br>
+    Buyer: {{ticket.buyerName}} {{ticket.buyerSurname}} <br>
+    Status: {{ticket.status}}<br>
+  </div>
+  </div>
+  </mat-card>
+  </div>
+</div>
+</body>

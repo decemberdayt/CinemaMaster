@@ -11,6 +11,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {BoardUserComponent} from "./board-user/board-user.component";
 import {BoardModeratorComponent} from "./board-moderator/board-moderator.component";
 import { ReservationsComponent } from './reservations/reservations.component';
+import {CancelReservationComponent} from "./reservations/cancel-reservation/cancel-reservation.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
   {path: 'reservations', component: ReservationsComponent},
+  {path: 'cancel', component: CancelReservationComponent}
 ];
 
 @NgModule({
