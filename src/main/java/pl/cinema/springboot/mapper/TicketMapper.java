@@ -43,7 +43,7 @@ public interface TicketMapper {
             ",BUYERSURNAME\n" +
             ",STATUS\n" +
             ",PRICE\n" +
-            ",REDUCED) VALUES (#{idTicket},#{idShow},#{idSeat},#{idHall},#{buyerName},#{buyerSurname},#{status},#{price},#{reduced})")
+            ",REDUCED) VALUES (#{idTicket},#{idShow},#{idSeat},#{idHall},#{buyerName},#{buyerSurname},'RESERVED',#{price},#{reduced})")
     void insert(Ticket ticket);
 
     @Select("SELECT IDTICKET\n" +
@@ -57,15 +57,15 @@ public interface TicketMapper {
             ",REDUCED FROM ANONYMOUS.TICKET WHERE IDTICKET = #{idTicket}")
     @Nullable Ticket findTicketById(int idTicket);
 
-    @Select("SELECT T.*\n" +
+    @Select("SELECT *\n" +
             "FROM \n" +
             "(\n" +
             "    SELECT * \n" +
             "    FROM ANONYMOUS.TICKET \n" +
             "    ORDER BY IDTICKET DESC\n" +
-            ") AS T\n" +
-            "LIMIT 1")
-    @Nullable Ticket findMaxId();
+            ")\n" +
+            "WHERE ROWNUM = 1")
+    @Nullable public Ticket findMaxId();
 
     @Update("UPDATE ANONYMOUS.TICKET\n" +
             "SET STATUS = 'CANCELLED'\n" +
@@ -87,7 +87,10 @@ public interface TicketMapper {
             "    , H.HALLNAME\n" +
             "    , T.IDSEAT\n" +
             "    , S.HALLROW\n" +
-            "    , T.STATUS\n" +
+            "    , CASE\n" +
+            "        WHEN SH.SHOWTIME > SYSTIMESTAMP THEN T.STATUS\n" +
+            "        ELSE 'OVERDUE'\n" +
+            "      END AS STATUS\n" +
             "FROM ANONYMOUS.USER_TICKETS UT\n" +
             "INNER JOIN ANONYMOUS.TICKET T\n" +
             "ON\n" +
@@ -123,7 +126,10 @@ public interface TicketMapper {
             "    , H.HALLNAME\n" +
             "    , T.IDSEAT\n" +
             "    , S.HALLROW\n" +
-            "    , T.STATUS\n" +
+            "    , CASE\n" +
+            "        WHEN SH.SHOWTIME > SYSTIMESTAMP THEN T.STATUS\n" +
+            "        ELSE 'OVERDUE'\n" +
+            "      END AS STATUS\n" +
             "FROM ANONYMOUS.USER_TICKETS UT\n" +
             "INNER JOIN ANONYMOUS.TICKET T\n" +
             "ON\n" +

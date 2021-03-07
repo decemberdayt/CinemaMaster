@@ -37,6 +37,7 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { ReservationsComponent } from './reservations/reservations.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CancelReservationComponent } from './reservations/cancel-reservation/cancel-reservation.component';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { CancelReservationComponent } from './reservations/cancel-reservation/ca
     FormsModule,
     MatStepperModule,
     MatListModule,
+    MatCarouselModule.forRoot(),
     MatDialogModule
   ],
   providers: [

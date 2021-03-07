@@ -27,11 +27,11 @@ public class EmailSenderImpl implements EmailSender {
     public void sendEmail(String to, String title, DataSource confirm) {
 
         Context context = new Context();
-        context.setVariable("header", "Potwierdzenie dokonania zakupy na CinemaApp");
-        context.setVariable("title", "Dziękujemy za zaufanie naszej firmie!");
-        context.setVariable("description", "W załączniku znajdziesz plik z potwierdzeniem zakupu. \n" +
-                "Plik pdf możesz również pobrać z naszej stronie po zalogowaniu. \n" +
-                "Liczymy, że jeszcze do nas wpadniesz! Miłego seansu :)");
+        context.setVariable("header", "Purchase confirmation CinemaApp");
+        context.setVariable("title", "Thank You for trusting our company!");
+        context.setVariable("description", "Purchase details in attachment. \n" +
+                "You can also find pdf file ready to download on our cinema site. \n" +
+                "Enjoy the show! :)");
         String body = null;
         try {
             body = templateEngine.process("template.html", context);

@@ -2,7 +2,7 @@
 <div class="container">
   <h2>Reserved tickets</h2>
   <div *ngFor= "let ticket of ticketsList">
-<mat-card class="listOfTickets" *ngIf = "ticket.status == 'reserved'">
+<mat-card class="listOfTickets" *ngIf = "ticket.status == 'RESERVED'">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap = "100px">
   <h4><strong>{{ticket.title}}</strong></h4>
   <div>
@@ -22,7 +22,7 @@
 </div>
 <h3 class="history">History</h3>
 <div *ngFor= "let ticket of ticketsList">
-  <mat-card class="listOfTickets" *ngIf = "ticket.status != 'reserved'">
+  <mat-card class="listOfTickets" *ngIf = "ticket.status != 'RESERVED'">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap = "100px">
     <h4><strong>{{ticket.title}}</strong></h4>
     <div>

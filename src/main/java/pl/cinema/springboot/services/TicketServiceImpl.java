@@ -71,7 +71,7 @@ public class TicketServiceImpl {
         var = purchaseSummary(ticketsId,idUser);
         Optional<User> user = userRepository.findById(Long.valueOf(idUser));
         DataSource bis = GeneratePdfReport.ticketsConfirmation(var);
-        emailSender.sendEmail(user.get().getEmail(), "CinemaApp - potwierdzenie zakupu", bis);
+        emailSender.sendEmail(user.get().getEmail(), "CinemaApp - purchase details", bis);
 
         return tickets;
     }

@@ -29,6 +29,7 @@ export class MoviesListComponent implements OnInit {
   @Input()
   shows: Array<Show> = [];
 
+
   @Input()
   isDatePicked: boolean
 

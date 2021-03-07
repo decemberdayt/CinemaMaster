@@ -89,7 +89,7 @@ public class GeneratePdfReport {
 
             //Paragraph paragraph = new Paragraph();
             Paragraph paragraph = null;
-            paragraph = new Paragraph(new Chunk("Potwierdzenie zamówienia: ", headFont));
+            paragraph = new Paragraph(new Chunk("Purchase confirmation: ", headFont));
             document.add(paragraph);
 
             paragraph = new Paragraph(new Chunk("Buyer Name: " + purchaseSummary.get(0).getBuyerName()));

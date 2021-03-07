@@ -19,21 +19,6 @@
   margin-bottom: 0px;
   padding: 20pt;
 }
-.footer-columns {
-  margin-left: auto;
-  margin-right: auto;
-  width: 900px;
-  align-content: center;
-}
-.footer-columns:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.footer-column {
-  float: left;
-  margin-right: 50pt;
-}
 #app {
   background: black;
   background-image: url("https://funkyimg.com/i/3aJ4n.jpg");
@@ -42,7 +27,8 @@
   background-size: 900pt;
 }
 #created {
-  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .navbar a:link {
   border: solid 1pt #c05d4f;

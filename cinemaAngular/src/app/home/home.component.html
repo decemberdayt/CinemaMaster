@@ -1,5 +1,43 @@
+<mat-carousel class="mat-carousel"
+              timings="250ms ease-in"
+              [autoplay]="true"
+              data-interval="5000"
+              color="accent"
+              maxWidth="auto"
+              proportion="50"
+              slides="5"
+              [loop]="true"
+              [hideArrows]="false"
+              [hideIndicators]="false"
+              [useKeyboard]="true"
+              [useMouseWheel]="false"
+              orientation="ltr"
+>
+  <mat-carousel-slide
+    *ngFor="let slide of slides; let i = index"
+    [image]= "slide.image"
+    overlayColor="#ffffff"
+    [hideOverlay]="false"
+  >
+    <img [src]="slide.image" class="slide">
+  </mat-carousel-slide>
+</mat-carousel>
 <div class="container">
+
   <header class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
+    Soon!
+     </header>
+  <body>
+  <p>
+    The Mandalorian is an American space Western television series created by Jon Favreau for the streaming service Disney+. It is the first live-action series in the Star Wars franchise, beginning five years after the events of Return of the Jedi (1983). It stars Pedro Pascal as the title character, a lone bounty hunter who goes on the run after being hired to retrieve "The Child".
+
+    Star Wars creator George Lucas began development on a live-action Star Wars television series by 2009, but the project was deemed too expensive to produce. After he sold Lucasfilm to Disney in October 2012, work on a new Star Wars series began for Disney+. Favreau signed on in March 2018, serving as writer and showrunner. He executive produces alongside Dave Filoni, Kathleen Kennedy, and Colin Wilson. The series' title was announced in October 2018 with the start of filming at Manhattan Beach Studios in California. Visual effects company Industrial Light & Magic developed the StageCraft technology for the series, using virtual sets and a 360-degree video wall to create the series' environments. This has since been adopted by other film and television productions.
+
+    The Mandalorian premiered with the launch of Disney+ on November 12, 2019. The eight-episode first season was met with positive reviews, was nominated for Outstanding Drama Series at the 72nd Primetime Emmy Awards, and won seven Primetime Creative Arts Emmy Awards. A second season premiered on October 30, 2020, and a third season is in pre-production. Three spin-off series will expand on the series' timeline: The Book of Boba Fett, Rangers of the New Republic, and Ahsoka.
+  </p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Mandalorian_black_background.svg/1920px-The_Mandalorian_black_background.svg.png" width="800px;" align="center;">
+
+  </body>
+
+
 </div>
