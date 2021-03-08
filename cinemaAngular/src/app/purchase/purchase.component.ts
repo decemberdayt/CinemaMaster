@@ -33,14 +33,20 @@ export class PurchaseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.buy.show == null)
+    var currentShow: Show | undefined = undefined;
+
+    this.buy.getShow().subscribe((buyShow) => {
+      currentShow = buyShow;
+    })
+
+    if (currentShow == null || currentShow == undefined)
     {
       // if show wasn't choosen, redirect to movies view
       this.router.navigateByUrl('movies');
     }
     else
     {
-      this.show = this.buy.show;
+      this.show = currentShow;
 
       this.getSeatsByShow(this.show.idShow);
 
@@ -85,14 +91,23 @@ export class PurchaseComponent implements OnInit {
     else this.secondStepCompleted = false;
   }
 
-   buyTickets() : void{
+  getTicketValues(){
+    this.buy.getBuyerName().subscribe((name) => {
+      this.buyerName = name;
+    })
+    this.buy.getBuyerSurname().subscribe((surname) => {
+      this.buyerSurename = surname;
+    })
+    this.buy.getNumberOfTickets().subscribe((number) => {
+      this.numberOfTicket = number;
+    })
+    this.buy.getSeatList().subscribe((seats) => {
+      this.seatsList = seats;
+    })
+  }
 
-	 console.log('Buy ticket ' +this.buy.buyerName);
-	 this.buyerName = this.buy.buyerName;
-	 this.buyerSurename = this.buy.buyerSurname;
-	 this.numberOfTicket = this.buy.numberOfTickets;
-	 this.seatsList = this.buy.seats;
-	 console.log(this.seatsList);
+   buyTickets() : void{
+   this.getTicketValues();
 	 for(let seat of this.seatsList){
     let ticket: Ticket = {
     idTicket: 1,

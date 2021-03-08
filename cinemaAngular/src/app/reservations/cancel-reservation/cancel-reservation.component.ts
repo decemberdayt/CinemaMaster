@@ -21,9 +21,14 @@ export class CancelReservationComponent implements OnInit {
   constructor(private httpService: CinemaService, private router: Router, private cancel: TicketService) { }
 
   ngOnInit(): void {
-    this.ticketId = this.cancel.cancelTicketId;
-    this.reservationDetails = this.cancel.cancelTicketDetails;
-    if (this.ticketId == undefined)
+    this.cancel.getCancelTicketId().subscribe((ticket) => {
+      this.ticketId = ticket;
+    })
+    this.cancel.getCancelTicketDetails().subscribe((details) => {
+      this.reservationDetails = details;
+    })
+
+    if (this.ticketId == 0 || this.ticketId == undefined)
       this.backToReservations();
   }
 

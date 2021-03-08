@@ -2,7 +2,7 @@ import { Time } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { tick } from '@angular/core/testing';
 import { NumberValueAccessor } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { PurchaseDetails } from '../models/purchseDetails';
 import { Seat } from '../models/seat';
 import { Show } from '../models/show';
@@ -14,67 +14,71 @@ import { PurchaseComponent } from '../purchase/purchase.component';
 })
 export class TicketService {
 
-  show: Show;
+  show = new BehaviorSubject<any>(undefined);
   movieTitle: string;
-  buyerName: string;
-  buyerSurname: string;
-  numberOfTickets: number;
-  numberOfTicketsObs = new Subject<number>();
-  seats: Array<Seat> = [];
-  buyedTickets: Array<Ticket> = [];
-  cancelTicketId: number;
-  cancelTicketDetails: PurchaseDetails;
-  cancelTicketIdObs = new Subject<number>();
-  cancelTicketDetailsObs = new Subject<PurchaseDetails>();
+  buyerName = new BehaviorSubject<string>("");
+  buyerSurname = new BehaviorSubject<string>("");
+  numberOfTickets = new BehaviorSubject<number>(0);
+  seats = new BehaviorSubject<any[]>([]);
+  cancelTicketId = new BehaviorSubject<number>(0);
+  cancelTicketDetails = new BehaviorSubject<any>(undefined);
 
   constructor() { }
 
-  buyTicket(show: Show){
-    this.show = show;
+  buyTicket(value: Show){
+    this.show.next(value);
+  }
+
+  getShow(): Observable<any>{
+    return this.show.asObservable();
   }
 
   setBuyerName(value: string){
-    this.buyerName = value;
+    this.buyerName.next(value);
+  }
+
+  getBuyerName(): Observable<string> {
+    return this.buyerName.asObservable();
   }
 
   setBuyerSurname(value: string){
-    this.buyerSurname = value;
+    this.buyerSurname.next(value);
+  }
+
+  getBuyerSurname(): Observable<string>{
+    return this.buyerSurname.asObservable();
   }
 
   setNumberOfTickets(value: number){
-    this.numberOfTickets = value;
-    this.numberOfTicketsObs.next(this.numberOfTickets);
+    this.numberOfTickets.next(value);
   }
 
   getNumberOfTickets(): Observable<number>{
-    return this.numberOfTicketsObs.asObservable();
+    return this.numberOfTickets.asObservable();
   }
 
   setSeatsList(value: Array<Seat>){
-    this.seats = value;
+    this.seats.next(value);
   }
 
-
-  setBuyedTckets(value: Array<Ticket>){
-    this.buyedTickets = value;
+  getSeatList(): Observable<Array<Seat>>{
+    return this.seats.asObservable();
   }
 
   setCancelTicketId(value: number){
-    this.cancelTicketId = value;
-    this.cancelTicketIdObs.next(this.cancelTicketId);
+    this.cancelTicketId.next(value);
   }
 
   setCancelTicketDetails(value: PurchaseDetails){
-    this.cancelTicketDetails  = value;
-    this.cancelTicketDetailsObs.next(this.cancelTicketDetails);
+    this.cancelTicketDetails.next(value);
   }
 
   getCancelTicketId(): Observable<number>{
-    return this.cancelTicketIdObs.asObservable();
+    return this.cancelTicketId.asObservable();
   }
 
   getCancelTicketDetails(): Observable<PurchaseDetails>{
-    return this.cancelTicketDetailsObs.asObservable();
+    return this.cancelTicketDetails.asObservable();
   }
 
 
